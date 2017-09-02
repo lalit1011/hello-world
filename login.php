@@ -2,7 +2,7 @@
 $fileName = $_SERVER['PHP_SELF'];
 // include('db_connection.php');
 include('navbar_layout.php');
-		
+		// print_r($_COOKIE);
 if(!$_SESSION['name']){
 	if(isset($_COOKIE['c_name'])){
      		echo 	$_SESSION['name'] = $_COOKIE['c_name'];
