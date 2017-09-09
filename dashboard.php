@@ -1,12 +1,12 @@
 <?php 
-$fileName = $_SERVER['PHP_SELF'];
-  include("db_connection.php");
- if(!isset($_SESSION['name']))
- {
- header("Location: login.php");
- exit;
- }
-  // print_r($_COOKIE);
+  include("db_conn.php");
+  if(!($_SESSION['is_user_logged_in']))
+  {
+    header("location:user_login.php");
+  }else{
+    $_SESSION['welcome_msg'] = "Welcome";
+    unset($_SESSION['welcome_msg']);
+  }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,29 +21,26 @@ $fileName = $_SERVER['PHP_SELF'];
 <body>
 <div class="container-fluid">
   <div class="row">
-      <nav class="navbar navbar-default"  style="background-color: #fff; border:none">
-        <div class="col-md-offset-1 col-md-2 ">
+      <nav class="navbar navbar-inverse" style="">
+        <div class="col-md-2 ">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>                        
             </button>
-            <a class="navbar-brand" href="index.php">WebSiteName</a>
+            <a class="navbar-brand" href="index.php" >JEWELLERs</a>
           </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <li <?php if($fileName=="/lalit/dashboard.php"){echo "class='active'"; } ?>><a href="dashboard.php">Dashboard</a></li>
-              <li  <?php if($fileName=="/lalit/index.php"){echo "class='active'"; } ?>><a href="index.php" >Home</a></li>
-              <!-- <li   <?php //if($fileName=="/lalit/view_all.php"){echo "class='active'"; } ?>><a href="view_all.php">View All</a></li> -->
-              <li   <?php if($fileName=="/lalit/pagination.php"){echo "class='active'"; } ?>><a href="pagination.php">Pagination</a></li>
-
+              <li class="active"><a href="index.php">Home</a></li>
+              <li class="active"><a href="dashboard.php">Dashboard</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <li ><a href="dashboard.php" ><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;<?php echo $_SESSION['name'];?></a></li>
-              <li><a href="logout.php"  ><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;logout</a></li>
+              <li><a href='index.php'><span class='glyphicon glyphicon-user'></span> <?php echo $_SESSION['name']?></a></li>;
+              <li><a href="logout1.php"  ><span class="glyphicon glyphicon-log-in"></span> logout</a></li>
             </ul>
           </div>
         </div>  
@@ -54,16 +51,17 @@ $fileName = $_SERVER['PHP_SELF'];
  <div class="container">
    <div class="row">
      <div class="col-md-3">
-          <h3>This is dashbord</h3>   
+          <h3>This is dashboard</h3>   
       </div>
      <div class="col-md-offset-6 col-md-3">
-     <h3 class="text-success">  <?php 
-     if($_SESSION['welcome_msg']!="")
-     {
-       echo $_SESSION['welcome_msg']."&nbsp;&nbsp;".$_SESSION['name'];
-       unset($_SESSION['welcome_msg']);
+     <h2>  <?php 
+     if($_SESSION['wel_msg']!=""){
+
+       echo $_SESSION['wel_msg'];
+       unset($_SESSION['wel_msg']);
      }
-      ?></h3>
+
+        ?></h2>
      </div>
    </div>
 
